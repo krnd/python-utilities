@@ -49,10 +49,13 @@ class ConfigParserAccessor:
         *,
         scope: str | None = None,
         listsep: str = DEFAULT_LISTSEP,
+        repack_variables: bool = True,
     ) -> None:
         self._source = source
 
-        self.variables = dict(variables or {})
+        if variables and repack_variables:
+            variables = dict(variables)
+        self.variables = variables or {}
 
         self.scope = scope
 
